@@ -11,4 +11,8 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.5" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SistemaIncidentes2025.CORE\SistemaIncidentes2025.CORE.csproj" />
+  </ItemGroup>
+
 </Project>
