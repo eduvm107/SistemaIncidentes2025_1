@@ -1,0 +1,142 @@
+{
+  "info": {
+    "name": "SistemaIncidentes2025 API - Ejemplo de uso de endpoints",
+    "_postman_id": "12345678-1234-1234-1234-1234567890ab",
+    "description": "Colección para probar los endpoints principales de la API de incidentes, con ejemplos de request y response.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Crear incidente (JSON)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"tipoIncidenteId\": 1,\n  \"titulo\": \"Robo en la calle\",\n  \"descripcion\": \"Se reporta robo de celular.\",\n  \"esAnonimo\": true,\n  \"latitud\": 19.4326,\n  \"longitud\": -99.1332,\n  \"direccion\": \"Calle Falsa 123\",\n  \"prioridad\": \"Alta\"\n}"
+        },
+        "url": { "raw": "http://localhost:5292/api/incidentes", "protocol": "http", "host": ["localhost"], "port": "5292", "path": ["api", "incidentes"] }
+      },
+      "response": [
+        {
+          "name": "Ejemplo de respuesta",
+          "originalRequest": {},
+          "status": "Created",
+          "code": 201,
+          "_postman_previewlanguage": "json",
+          "header": [{"key": "Content-Type", "value": "application/json"}],
+          "body": "{\n  \"id\": 1,\n  \"tipoIncidenteId\": 1,\n  \"titulo\": \"Robo en la calle\",\n  \"descripcion\": \"Se reporta robo de celular.\",\n  \"esAnonimo\": true,\n  \"latitud\": 19.4326,\n  \"longitud\": -99.1332,\n  \"direccion\": \"Calle Falsa 123\",\n  \"fechaIncidente\": \"2024-06-08T12:00:00Z\",\n  \"estado\": \"Pendiente\",\n  \"prioridad\": \"Alta\",\n  \"numeroReferencia\": null,\n  \"tipoIncidenteNombre\": \"Robo\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "Crear incidente con foto (multipart/form-data)",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            { "key": "tipoIncidenteId", "value": "1", "type": "text" },
+            { "key": "titulo", "value": "Incendio en edificio", "type": "text" },
+            { "key": "descripcion", "value": "Fuego en el tercer piso.", "type": "text" },
+            { "key": "esAnonimo", "value": "false", "type": "text" },
+            { "key": "latitud", "value": "19.4326", "type": "text" },
+            { "key": "longitud", "value": "-99.1332", "type": "text" },
+            { "key": "direccion", "value": "Av. Principal 456", "type": "text" },
+            { "key": "prioridad", "value": "Alta", "type": "text" },
+            { "key": "foto", "type": "file", "src": "" }
+          ]
+        },
+        "url": { "raw": "http://localhost:5292/api/incidentes/con-foto", "protocol": "http", "host": ["localhost"], "port": "5292", "path": ["api", "incidentes", "con-foto"] }
+      },
+      "response": [
+        {
+          "name": "Ejemplo de respuesta",
+          "originalRequest": {},
+          "status": "Created",
+          "code": 201,
+          "_postman_previewlanguage": "json",
+          "header": [{"key": "Content-Type", "value": "application/json"}],
+          "body": "{\n  \"id\": 2,\n  \"tipoIncidenteId\": 1,\n  \"titulo\": \"Incendio en edificio\",\n  \"descripcion\": \"Fuego en el tercer piso.\",\n  \"esAnonimo\": false,\n  \"latitud\": 19.4326,\n  \"longitud\": -99.1332,\n  \"direccion\": \"Av. Principal 456\",\n  \"fechaIncidente\": \"2024-06-08T12:05:00Z\",\n  \"estado\": \"Pendiente\",\n  \"prioridad\": \"Alta\",\n  \"numeroReferencia\": null,\n  \"tipoIncidenteNombre\": \"Incendio\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "Obtener incidentes aprobados (foro)",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": { "raw": "http://localhost:5292/api/incidentes", "protocol": "http", "host": ["localhost"], "port": "5292", "path": ["api", "incidentes"] }
+      },
+      "response": [
+        {
+          "name": "Ejemplo de respuesta",
+          "originalRequest": {},
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [{"key": "Content-Type", "value": "application/json"}],
+          "body": "[{\n  \"id\": 1,\n  \"tipoIncidenteId\": 1,\n  \"titulo\": \"Robo en la calle\",\n  \"descripcion\": \"Se reporta robo de celular.\",\n  \"esAnonimo\": true,\n  \"latitud\": 19.4326,\n  \"longitud\": -99.1332,\n  \"direccion\": \"Calle Falsa 123\",\n  \"fechaIncidente\": \"2024-06-08T12:00:00Z\",\n  \"estado\": \"Aprobado\",\n  \"prioridad\": \"Alta\",\n  \"numeroReferencia\": null,\n  \"tipoIncidenteNombre\": \"Robo\"\n}]"
+        }
+      ]
+    },
+    {
+      "name": "Obtener incidentes para mapa",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": { "raw": "http://localhost:5292/api/incidentes/mapa", "protocol": "http", "host": ["localhost"], "port": "5292", "path": ["api", "incidentes", "mapa"] }
+      },
+      "response": [
+        {
+          "name": "Ejemplo de respuesta",
+          "originalRequest": {},
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [{"key": "Content-Type", "value": "application/json"}],
+          "body": "[{\n  \"id\": 1,\n  \"latitud\": 19.4326,\n  \"longitud\": -99.1332,\n  \"estado\": \"Aprobado\",\n  \"prioridad\": \"Alta\",\n  \"tipoIncidenteNombre\": \"Robo\"\n}]"
+        }
+      ]
+    },
+    {
+      "name": "Obtener tipos de incidente",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": { "raw": "http://localhost:5292/api/tiposincidente", "protocol": "http", "host": ["localhost"], "port": "5292", "path": ["api", "tiposincidente"] }
+      },
+      "response": [
+        {
+          "name": "Ejemplo de respuesta",
+          "originalRequest": {},
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [{"key": "Content-Type", "value": "application/json"}],
+          "body": "[{\n  \"id\": 1,\n  \"nombre\": \"Robo\",\n  \"descripcion\": \"Robo o asalto\"\n}, {\n  \"id\": 2,\n  \"nombre\": \"Emergencia médica\",\n  \"descripcion\": \"Atención médica urgente\"\n}]"
+        }
+      ]
+    },
+    {
+      "name": "Obtener contactos de emergencia",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": { "raw": "http://localhost:5292/api/contactosemergencia", "protocol": "http", "host": ["localhost"], "port": "5292", "path": ["api", "contactosemergencia"] }
+      },
+      "response": [
+        {
+          "name": "Ejemplo de respuesta",
+          "originalRequest": {},
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [{"key": "Content-Type", "value": "application/json"}],
+          "body": "[{\n  \"id\": 1,\n  \"institucion\": \"Policía\",\n  \"telefono\": \"911\",\n  \"email\": \"policia@emergencia.com\",\n  \"tipoIncidenteId\": 1,\n  \"tipoIncidenteNombre\": \"Robo\",\n  \"ordenPrioridad\": 1\n}, {\n  \"id\": 2,\n  \"institucion\": \"Bomberos\",\n  \"telefono\": \"911\",\n  \"email\": \"bomberos@emergencia.com\",\n  \"tipoIncidenteId\": 3,\n  \"tipoIncidenteNombre\": \"Incendio\",\n  \"ordenPrioridad\": 2\n}]"
+        }
+      ]
+    }
+  ]
+}
